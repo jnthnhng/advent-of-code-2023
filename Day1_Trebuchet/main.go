@@ -24,10 +24,17 @@ func main() {
 		}
 	}(f)
 
-	var calibrationValuesSum int
 	scanner := bufio.NewScanner(f)
-	for scanner.Scan() {
-		line := scanner.Text()
+	var calibrationValuesSum int = getCalibrationValuesSum(f, scanner)
+	fmt.Println(calibrationValuesSum)
+
+}
+
+func getCalibrationValuesSum(f *os.File, s *bufio.Scanner) int {
+
+	totalSum := 0
+	for s.Scan() {
+		line := s.Text()
 
 		var firstInt int32
 		for index, value := range line {
@@ -48,13 +55,12 @@ func main() {
 		}
 		firstValue, _ := strconv.Atoi(string(firstInt))
 		secondValue, _ := strconv.Atoi(string(secondInt))
-		calibrationValuesSum += (firstValue * 10) + secondValue
-
+		totalSum += (firstValue * 10) + secondValue
 	}
 
-	if err := scanner.Err(); err != nil {
+	if err := s.Err(); err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println(calibrationValuesSum)
+	return totalSum
 }
