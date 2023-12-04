@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 )
@@ -61,7 +60,6 @@ func main() {
 			}
 		}
 
-		fmt.Printf("%s, %s\n", string(firstInt), string(secondInt))
 	}
 
 	if err := scanner.Err(); err != nil {
