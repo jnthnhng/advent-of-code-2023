@@ -8,24 +8,9 @@ import (
 	"strconv"
 )
 
-/*
-*
-Pseudo:
-
-	Read data from file
-	For each line in the file
-		Use two pointers:
-			one at the beginning, iterating forward
-			one at the end, iterating backwards.
-		Stop at the first integer
-		Combine the integers and add to the array of results
-	Creates a result array
-
-	Add up all the number and return the result
-*/
 func main() {
 	// Open file
-	f, err := os.Open("data.txt")
+	f, err := os.Open(os.Args[1])
 
 	if err != nil {
 		log.Fatal(err)
