@@ -2,8 +2,10 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
+	"strconv"
 )
 
 /*
@@ -37,8 +39,8 @@ func main() {
 		}
 	}(f)
 
+	var calibrationValuesSum int
 	scanner := bufio.NewScanner(f)
-
 	for scanner.Scan() {
 		line := scanner.Text()
 
@@ -50,15 +52,18 @@ func main() {
 			}
 		}
 
-		var secondInt int32
+		var secondInt uint8
 		last := len(line) - 1
 		for index := range line {
 			value := line[last-index]
 			if value >= '0' && value <= '9' {
-				secondInt = int32(value)
+				secondInt = value
 				break
 			}
 		}
+		firstValue, _ := strconv.Atoi(string(firstInt))
+		secondValue, _ := strconv.Atoi(string(secondInt))
+		calibrationValuesSum += (firstValue * 10) + secondValue
 
 	}
 
@@ -66,4 +71,5 @@ func main() {
 		log.Fatal(err)
 	}
 
+	fmt.Println(calibrationValuesSum)
 }
